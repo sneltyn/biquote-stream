@@ -1,0 +1,16 @@
+# The builder stage does `COPY . .`, so without this the whole local
+# node_modules and dist go into the build context — slow, and worse, they
+# SHADOW what the deps stage just installed for the target platform. CI checks
+# out clean so it would not notice; a local `docker build` would.
+node_modules
+dist
+dist-prod
+.git
+.github
+.yarn
+.env
+.DS_Store
+coverage
+logs
+README.md
+docker-compose.yml

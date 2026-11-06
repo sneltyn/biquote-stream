@@ -1,0 +1,21 @@
+# Local/standalone run. In binodex the real deployment lives in
+# infra/deploy/compose/feed.yml alongside the other producers — this file is for
+# running the stream on its own against a local NATS.
+services:
+  biquote-stream:
+    image: ghcr.io/sneltyn/biquote-stream:main
+    build: .
+    restart: unless-stopped
+    stop_grace_period: 15s
+    volumes:
+      - ./pairs.forex.json:/app/pairs.forex.json:ro
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      APP_NAME: ${APP_NAME:-biquote-stream}
+      BIQUOTE_HUB_URL: ${BIQUOTE_HUB_URL:-https://biquote.io/hubs/tick}
+      SYMBOL_OVERRIDES: ${SYMBOL_OVERRIDES:-}
+      NATS_SERVERS: ${NATS_SERVERS:-nats://nats:4222}
+      NATS_NAME: ${NATS_NAME:-biquote-stream}
+      NATS_USER: ${NATS_USER:-}
+      NATS_PASSWORD: ${NATS_PASSWORD:-}
+      NATS_SUBJECT_FOREX: ${NATS_SUBJECT_FOREX:-prices.forex.biquote}

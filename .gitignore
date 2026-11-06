@@ -1,0 +1,21 @@
+/dist
+/dist-prod
+/node_modules
+/coverage
+/logs
+/public/output
+/public/temp
+/public/uploads
+/home
+/puck
+/prisma/generated
+# Yarn's runtime stays OUT of the repo: the version is pinned by
+# `packageManager` in package.json and fetched by Corepack. Do not add a
+# `yarnPath` to .yarnrc.yml — it would point at a path this rule excludes, and
+# a fresh clone would have no package manager.
+.yarn/
+package-lock.json
+yarn-error.log
+.idea/
+.DS_Store
+.env
